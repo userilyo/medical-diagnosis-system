@@ -1,0 +1,11 @@
+patient_id,symptoms,ground_truth
+1,"Chest pain and shortness of breath for 2 days",I20.0
+2,"Persistent headache with nausea and vomiting",R51
+3,"Abdominal pain in lower right quadrant with fever",K35.9
+4,"Difficulty breathing and wheezing after exercise",J45.9
+5,"Joint pain and swelling in multiple joints",M79.3
+6,"Persistent cough with blood-tinged sputum",R04.2
+7,"Sudden onset of severe back pain",M54.5
+8,"Frequent urination with burning sensation",N39.0
+9,"Skin rash with itching and redness",L30.9
+10,"Dizziness and loss of balance",R42

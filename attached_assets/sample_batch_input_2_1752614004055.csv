@@ -1,0 +1,6 @@
+patient_id,symptoms,ground_truth
+1,Chest pain and shortness of breath for 2 days,I20.0
+2,Persistent headache with nausea and vomiting,R51
+3,Abdominal pain in lower right quadrant with fever,K35.9
+4,Difficulty breathing and wheezing after exercise,J45.9
+5,Joint pain and swelling in multiple joints,M79.3
