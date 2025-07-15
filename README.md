@@ -1,4 +1,4 @@
-# Medical Diagnosis AI Ensemble
+# Medical Diagnosis AI System
 
 A comprehensive medical diagnostic AI application that leverages multi-modal machine learning techniques to provide accurate ICD-10 diagnostic predictions with explainable AI features.
 
