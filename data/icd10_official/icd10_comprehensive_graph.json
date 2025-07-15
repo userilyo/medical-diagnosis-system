@@ -1,0 +1,1181 @@
+{
+  "nodes": [
+    {
+      "id": "ROOT",
+      "data": {
+        "desc": "ICD-10-CM Root",
+        "level": 0
+      }
+    },
+    {
+      "id": "CHAPTER_A00-B99",
+      "data": {
+        "desc": "Certain infectious and parasitic diseases",
+        "level": 1,
+        "range": "A00-B99"
+      }
+    },
+    {
+      "id": "CHAPTER_C00-D49",
+      "data": {
+        "desc": "Neoplasms",
+        "level": 1,
+        "range": "C00-D49"
+      }
+    },
+    {
+      "id": "CHAPTER_D50-D89",
+      "data": {
+        "desc": "Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism",
+        "level": 1,
+        "range": "D50-D89"
+      }
+    },
+    {
+      "id": "CHAPTER_E00-E89",
+      "data": {
+        "desc": "Endocrine, nutritional and metabolic diseases",
+        "level": 1,
+        "range": "E00-E89"
+      }
+    },
+    {
+      "id": "CHAPTER_F01-F99",
+      "data": {
+        "desc": "Mental, Behavioral and Neurodevelopmental disorders",
+        "level": 1,
+        "range": "F01-F99"
+      }
+    },
+    {
+      "id": "CHAPTER_G00-G99",
+      "data": {
+        "desc": "Diseases of the nervous system",
+        "level": 1,
+        "range": "G00-G99"
+      }
+    },
+    {
+      "id": "CHAPTER_H00-H59",
+      "data": {
+        "desc": "Diseases of the eye and adnexa",
+        "level": 1,
+        "range": "H00-H59"
+      }
+    },
+    {
+      "id": "CHAPTER_H60-H95",
+      "data": {
+        "desc": "Diseases of the ear and mastoid process",
+        "level": 1,
+        "range": "H60-H95"
+      }
+    },
+    {
+      "id": "CHAPTER_I00-I99",
+      "data": {
+        "desc": "Diseases of the circulatory system",
+        "level": 1,
+        "range": "I00-I99"
+      }
+    },
+    {
+      "id": "CHAPTER_J00-J99",
+      "data": {
+        "desc": "Diseases of the respiratory system",
+        "level": 1,
+        "range": "J00-J99"
+      }
+    },
+    {
+      "id": "CHAPTER_K00-K95",
+      "data": {
+        "desc": "Diseases of the digestive system",
+        "level": 1,
+        "range": "K00-K95"
+      }
+    },
+    {
+      "id": "CHAPTER_L00-L99",
+      "data": {
+        "desc": "Diseases of the skin and subcutaneous tissue",
+        "level": 1,
+        "range": "L00-L99"
+      }
+    },
+    {
+      "id": "CHAPTER_M00-M99",
+      "data": {
+        "desc": "Diseases of the musculoskeletal system and connective tissue",
+        "level": 1,
+        "range": "M00-M99"
+      }
+    },
+    {
+      "id": "CHAPTER_N00-N99",
+      "data": {
+        "desc": "Diseases of the genitourinary system",
+        "level": 1,
+        "range": "N00-N99"
+      }
+    },
+    {
+      "id": "CHAPTER_O00-O9A",
+      "data": {
+        "desc": "Pregnancy, childbirth and the puerperium",
+        "level": 1,
+        "range": "O00-O9A"
+      }
+    },
+    {
+      "id": "CHAPTER_P00-P96",
+      "data": {
+        "desc": "Certain conditions originating in the perinatal period",
+        "level": 1,
+        "range": "P00-P96"
+      }
+    },
+    {
+      "id": "CHAPTER_Q00-Q99",
+      "data": {
+        "desc": "Congenital malformations, deformations and chromosomal abnormalities",
+        "level": 1,
+        "range": "Q00-Q99"
+      }
+    },
+    {
+      "id": "CHAPTER_R00-R99",
+      "data": {
+        "desc": "Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified",
+        "level": 1,
+        "range": "R00-R99"
+      }
+    },
+    {
+      "id": "CHAPTER_S00-T88",
+      "data": {
+        "desc": "Injury, poisoning and certain other consequences of external causes",
+        "level": 1,
+        "range": "S00-T88"
+      }
+    },
+    {
+      "id": "CHAPTER_U00-U85",
+      "data": {
+        "desc": "Codes for special purposes",
+        "level": 1,
+        "range": "U00-U85"
+      }
+    },
+    {
+      "id": "CHAPTER_V00-Y99",
+      "data": {
+        "desc": "External causes of morbidity",
+        "level": 1,
+        "range": "V00-Y99"
+      }
+    },
+    {
+      "id": "CHAPTER_Z00-Z99",
+      "data": {
+        "desc": "Factors influencing health status and contact with health services",
+        "level": 1,
+        "range": "Z00-Z99"
+      }
+    },
+    {
+      "id": "BLOCK_A00-A09",
+      "data": {
+        "desc": "Intestinal infectious diseases",
+        "level": 2,
+        "range": "A00-A09"
+      }
+    },
+    {
+      "id": "BLOCK_A15-A19",
+      "data": {
+        "desc": "Tuberculosis",
+        "level": 2,
+        "range": "A15-A19"
+      }
+    },
+    {
+      "id": "BLOCK_A20-A28",
+      "data": {
+        "desc": "Certain zoonotic bacterial diseases",
+        "level": 2,
+        "range": "A20-A28"
+      }
+    },
+    {
+      "id": "BLOCK_A30-A49",
+      "data": {
+        "desc": "Other bacterial diseases",
+        "level": 2,
+        "range": "A30-A49"
+      }
+    },
+    {
+      "id": "A41.9",
+      "data": {
+        "desc": "Sepsis, unspecified organism",
+        "level": 3,
+        "code": "A41.9"
+      }
+    },
+    {
+      "id": "A41",
+      "data": {
+        "desc": "Category A41",
+        "level": 3,
+        "code": "A41"
+      }
+    },
+    {
+      "id": "BLOCK_A50-A64",
+      "data": {
+        "desc": "Infections with a predominantly sexual mode of transmission",
+        "level": 2,
+        "range": "A50-A64"
+      }
+    },
+    {
+      "id": "BLOCK_A65-A69",
+      "data": {
+        "desc": "Other spirochetal diseases",
+        "level": 2,
+        "range": "A65-A69"
+      }
+    },
+    {
+      "id": "BLOCK_A70-A74",
+      "data": {
+        "desc": "Other diseases caused by chlamydiae",
+        "level": 2,
+        "range": "A70-A74"
+      }
+    },
+    {
+      "id": "BLOCK_A75-A79",
+      "data": {
+        "desc": "Rickettsioses",
+        "level": 2,
+        "range": "A75-A79"
+      }
+    },
+    {
+      "id": "BLOCK_A80-A89",
+      "data": {
+        "desc": "Viral and prion infections of the central nervous system",
+        "level": 2,
+        "range": "A80-A89"
+      }
+    },
+    {
+      "id": "BLOCK_A90-A99",
+      "data": {
+        "desc": "Arthropod-borne viral fevers and viral hemorrhagic fevers",
+        "level": 2,
+        "range": "A90-A99"
+      }
+    },
+    {
+      "id": "BLOCK_B00-B09",
+      "data": {
+        "desc": "Viral infections characterized by skin and mucous membrane lesions",
+        "level": 2,
+        "range": "B00-B09"
+      }
+    },
+    {
+      "id": "BLOCK_B10-B19",
+      "data": {
+        "desc": "Other viral diseases",
+        "level": 2,
+        "range": "B10-B19"
+      }
+    },
+    {
+      "id": "BLOCK_B20-B24",
+      "data": {
+        "desc": "Human immunodeficiency virus [HIV] disease",
+        "level": 2,
+        "range": "B20-B24"
+      }
+    },
+    {
+      "id": "BLOCK_B25-B34",
+      "data": {
+        "desc": "Other viral diseases",
+        "level": 2,
+        "range": "B25-B34"
+      }
+    },
+    {
+      "id": "BLOCK_B35-B49",
+      "data": {
+        "desc": "Mycoses",
+        "level": 2,
+        "range": "B35-B49"
+      }
+    },
+    {
+      "id": "BLOCK_B50-B64",
+      "data": {
+        "desc": "Protozoal diseases",
+        "level": 2,
+        "range": "B50-B64"
+      }
+    },
+    {
+      "id": "BLOCK_B65-B83",
+      "data": {
+        "desc": "Helminthiases",
+        "level": 2,
+        "range": "B65-B83"
+      }
+    },
+    {
+      "id": "BLOCK_B85-B89",
+      "data": {
+        "desc": "Pediculosis, acariasis and other infestations",
+        "level": 2,
+        "range": "B85-B89"
+      }
+    },
+    {
+      "id": "BLOCK_B90-B94",
+      "data": {
+        "desc": "Sequelae of infectious and parasitic diseases",
+        "level": 2,
+        "range": "B90-B94"
+      }
+    },
+    {
+      "id": "BLOCK_B95-B97",
+      "data": {
+        "desc": "Bacterial and viral infectious agents",
+        "level": 2,
+        "range": "B95-B97"
+      }
+    },
+    {
+      "id": "BLOCK_B99",
+      "data": {
+        "desc": "Other infectious diseases",
+        "level": 2,
+        "range": "B99"
+      }
+    },
+    {
+      "id": "BLOCK_I00-I09",
+      "data": {
+        "desc": "Acute rheumatic fever",
+        "level": 2,
+        "range": "I00-I09"
+      }
+    },
+    {
+      "id": "BLOCK_I10-I16",
+      "data": {
+        "desc": "Hypertensive diseases",
+        "level": 2,
+        "range": "I10-I16"
+      }
+    },
+    {
+      "id": "BLOCK_I20-I25",
+      "data": {
+        "desc": "Ischemic heart diseases",
+        "level": 2,
+        "range": "I20-I25"
+      }
+    },
+    {
+      "id": "I21.4",
+      "data": {
+        "desc": "Non-ST elevation (NSTEMI) myocardial infarction",
+        "level": 3,
+        "code": "I21.4"
+      }
+    },
+    {
+      "id": "I21",
+      "data": {
+        "desc": "Category I21",
+        "level": 3,
+        "code": "I21"
+      }
+    },
+    {
+      "id": "I25.10",
+      "data": {
+        "desc": "Atherosclerotic heart disease of native coronary artery without angina pectoris",
+        "level": 3,
+        "code": "I25.10"
+      }
+    },
+    {
+      "id": "I25",
+      "data": {
+        "desc": "Category I25",
+        "level": 3,
+        "code": "I25"
+      }
+    },
+    {
+      "id": "BLOCK_I26-I28",
+      "data": {
+        "desc": "Pulmonary heart disease and diseases of pulmonary circulation",
+        "level": 2,
+        "range": "I26-I28"
+      }
+    },
+    {
+      "id": "BLOCK_I30-I52",
+      "data": {
+        "desc": "Other forms of heart disease",
+        "level": 2,
+        "range": "I30-I52"
+      }
+    },
+    {
+      "id": "I35.9",
+      "data": {
+        "desc": "Nonrheumatic aortic valve disorder, unspecified",
+        "level": 3,
+        "code": "I35.9"
+      }
+    },
+    {
+      "id": "I35",
+      "data": {
+        "desc": "Category I35",
+        "level": 3,
+        "code": "I35"
+      }
+    },
+    {
+      "id": "BLOCK_I60-I69",
+      "data": {
+        "desc": "Cerebrovascular diseases",
+        "level": 2,
+        "range": "I60-I69"
+      }
+    },
+    {
+      "id": "I61.9",
+      "data": {
+        "desc": "Nontraumatic intracerebral hemorrhage, unspecified",
+        "level": 3,
+        "code": "I61.9"
+      }
+    },
+    {
+      "id": "I61",
+      "data": {
+        "desc": "Category I61",
+        "level": 3,
+        "code": "I61"
+      }
+    },
+    {
+      "id": "BLOCK_I70-I79",
+      "data": {
+        "desc": "Diseases of arteries, arterioles and capillaries",
+        "level": 2,
+        "range": "I70-I79"
+      }
+    },
+    {
+      "id": "BLOCK_I80-I89",
+      "data": {
+        "desc": "Diseases of veins, lymphatic vessels and lymph nodes",
+        "level": 2,
+        "range": "I80-I89"
+      }
+    },
+    {
+      "id": "BLOCK_I95-I99",
+      "data": {
+        "desc": "Other and unspecified disorders of the circulatory system",
+        "level": 2,
+        "range": "I95-I99"
+      }
+    },
+    {
+      "id": "BLOCK_J00-J06",
+      "data": {
+        "desc": "Acute upper respiratory infections",
+        "level": 2,
+        "range": "J00-J06"
+      }
+    },
+    {
+      "id": "BLOCK_J09-J18",
+      "data": {
+        "desc": "Influenza and pneumonia",
+        "level": 2,
+        "range": "J09-J18"
+      }
+    },
+    {
+      "id": "J18.9",
+      "data": {
+        "desc": "Pneumonia, unspecified organism",
+        "level": 3,
+        "code": "J18.9"
+      }
+    },
+    {
+      "id": "J18",
+      "data": {
+        "desc": "Category J18",
+        "level": 3,
+        "code": "J18"
+      }
+    },
+    {
+      "id": "BLOCK_J20-J22",
+      "data": {
+        "desc": "Other acute lower respiratory infections",
+        "level": 2,
+        "range": "J20-J22"
+      }
+    },
+    {
+      "id": "BLOCK_J30-J39",
+      "data": {
+        "desc": "Other diseases of upper respiratory tract",
+        "level": 2,
+        "range": "J30-J39"
+      }
+    },
+    {
+      "id": "BLOCK_J40-J47",
+      "data": {
+        "desc": "Chronic lower respiratory diseases",
+        "level": 2,
+        "range": "J40-J47"
+      }
+    },
+    {
+      "id": "BLOCK_J60-J70",
+      "data": {
+        "desc": "Lung diseases due to external agents",
+        "level": 2,
+        "range": "J60-J70"
+      }
+    },
+    {
+      "id": "BLOCK_J80-J84",
+      "data": {
+        "desc": "Other respiratory diseases principally affecting the interstitium",
+        "level": 2,
+        "range": "J80-J84"
+      }
+    },
+    {
+      "id": "BLOCK_J85-J86",
+      "data": {
+        "desc": "Suppurative and necrotic conditions of the lower respiratory tract",
+        "level": 2,
+        "range": "J85-J86"
+      }
+    },
+    {
+      "id": "BLOCK_J90-J94",
+      "data": {
+        "desc": "Other diseases of the pleura",
+        "level": 2,
+        "range": "J90-J94"
+      }
+    },
+    {
+      "id": "BLOCK_J95-J99",
+      "data": {
+        "desc": "Other diseases of the respiratory system",
+        "level": 2,
+        "range": "J95-J99"
+      }
+    },
+    {
+      "id": "J96.00",
+      "data": {
+        "desc": "Acute respiratory failure, unspecified whether with hypoxia or hypercapnia",
+        "level": 3,
+        "code": "J96.00"
+      }
+    },
+    {
+      "id": "J96",
+      "data": {
+        "desc": "Category J96",
+        "level": 3,
+        "code": "J96"
+      }
+    },
+    {
+      "id": "BLOCK_Z00-Z13",
+      "data": {
+        "desc": "Persons encountering health services for examinations",
+        "level": 2,
+        "range": "Z00-Z13"
+      }
+    },
+    {
+      "id": "BLOCK_Z14-Z15",
+      "data": {
+        "desc": "Genetic carrier and genetic susceptibility to disease",
+        "level": 2,
+        "range": "Z14-Z15"
+      }
+    },
+    {
+      "id": "BLOCK_Z16-Z17",
+      "data": {
+        "desc": "Resistance to antimicrobial drugs",
+        "level": 2,
+        "range": "Z16-Z17"
+      }
+    },
+    {
+      "id": "BLOCK_Z18",
+      "data": {
+        "desc": "Retained foreign body fragments",
+        "level": 2,
+        "range": "Z18"
+      }
+    },
+    {
+      "id": "BLOCK_Z19",
+      "data": {
+        "desc": "Hormone sensitivity malignancy status",
+        "level": 2,
+        "range": "Z19"
+      }
+    },
+    {
+      "id": "BLOCK_Z20-Z29",
+      "data": {
+        "desc": "Persons with potential health hazards related to communicable diseases",
+        "level": 2,
+        "range": "Z20-Z29"
+      }
+    },
+    {
+      "id": "BLOCK_Z30-Z39",
+      "data": {
+        "desc": "Persons encountering health services in circumstances related to reproduction",
+        "level": 2,
+        "range": "Z30-Z39"
+      }
+    },
+    {
+      "id": "Z38.00",
+      "data": {
+        "desc": "Single liveborn infant, delivered vaginally",
+        "level": 3,
+        "code": "Z38.00"
+      }
+    },
+    {
+      "id": "Z38",
+      "data": {
+        "desc": "Category Z38",
+        "level": 3,
+        "code": "Z38"
+      }
+    },
+    {
+      "id": "Z38.01",
+      "data": {
+        "desc": "Single liveborn infant, delivered by cesarean",
+        "level": 3,
+        "code": "Z38.01"
+      }
+    },
+    {
+      "id": "Z38.31",
+      "data": {
+        "desc": "Twin liveborn infant, delivered by cesarean",
+        "level": 3,
+        "code": "Z38.31"
+      }
+    },
+    {
+      "id": "BLOCK_Z40-Z53",
+      "data": {
+        "desc": "Persons encountering health services for specific procedures and treatment",
+        "level": 2,
+        "range": "Z40-Z53"
+      }
+    },
+    {
+      "id": "BLOCK_Z55-Z65",
+      "data": {
+        "desc": "Persons with potential health hazards related to socioeconomic and psychosocial circumstances",
+        "level": 2,
+        "range": "Z55-Z65"
+      }
+    },
+    {
+      "id": "BLOCK_Z66",
+      "data": {
+        "desc": "Do not resuscitate",
+        "level": 2,
+        "range": "Z66"
+      }
+    },
+    {
+      "id": "BLOCK_Z67",
+      "data": {
+        "desc": "Blood type",
+        "level": 2,
+        "range": "Z67"
+      }
+    },
+    {
+      "id": "BLOCK_Z68",
+      "data": {
+        "desc": "Body mass index [BMI]",
+        "level": 2,
+        "range": "Z68"
+      }
+    },
+    {
+      "id": "BLOCK_Z69-Z76",
+      "data": {
+        "desc": "Persons encountering health services in other circumstances",
+        "level": 2,
+        "range": "Z69-Z76"
+      }
+    },
+    {
+      "id": "BLOCK_Z77-Z99",
+      "data": {
+        "desc": "Persons with potential health hazards related to family and personal history and certain conditions influencing health status",
+        "level": 2,
+        "range": "Z77-Z99"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_A00-B99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_C00-D49"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_D50-D89"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_E00-E89"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_F01-F99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_G00-G99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_H00-H59"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_H60-H95"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_I00-I99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_J00-J99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_K00-K95"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_L00-L99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_M00-M99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_N00-N99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_O00-O9A"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_P00-P96"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_Q00-Q99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_R00-R99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_S00-T88"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_U00-U85"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_V00-Y99"
+    },
+    {
+      "source": "ROOT",
+      "target": "CHAPTER_Z00-Z99"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A00-A09"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A15-A19"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A20-A28"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A30-A49"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A50-A64"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A65-A69"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A70-A74"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A75-A79"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A80-A89"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_A90-A99"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B00-B09"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B10-B19"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B20-B24"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B25-B34"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B35-B49"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B50-B64"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B65-B83"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B85-B89"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B90-B94"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B95-B97"
+    },
+    {
+      "source": "CHAPTER_A00-B99",
+      "target": "BLOCK_B99"
+    },
+    {
+      "source": "CHAPTER_I00-I99",
+      "target": "BLOCK_I00-I09"
+    },
+    {
+      "source": "CHAPTER_I00-I99",
+      "target": "BLOCK_I10-I16"
+    },
+    {
+      "source": "CHAPTER_I00-I99",
+      "target": "BLOCK_I20-I25"
+    },
+    {
+      "source": "CHAPTER_I00-I99",
+      "target": "BLOCK_I26-I28"
+    },
+    {
+      "source": "CHAPTER_I00-I99",
+      "target": "BLOCK_I30-I52"
+    },
+    {
+      "source": "CHAPTER_I00-I99",
+      "target": "BLOCK_I60-I69"
+    },
+    {
+      "source": "CHAPTER_I00-I99",
+      "target": "BLOCK_I70-I79"
+    },
+    {
+      "source": "CHAPTER_I00-I99",
+      "target": "BLOCK_I80-I89"
+    },
+    {
+      "source": "CHAPTER_I00-I99",
+      "target": "BLOCK_I95-I99"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J00-J06"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J09-J18"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J20-J22"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J30-J39"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J40-J47"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J60-J70"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J80-J84"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J85-J86"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J90-J94"
+    },
+    {
+      "source": "CHAPTER_J00-J99",
+      "target": "BLOCK_J95-J99"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z00-Z13"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z14-Z15"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z16-Z17"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z18"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z19"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z20-Z29"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z30-Z39"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z40-Z53"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z55-Z65"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z66"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z67"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z68"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z69-Z76"
+    },
+    {
+      "source": "CHAPTER_Z00-Z99",
+      "target": "BLOCK_Z77-Z99"
+    },
+    {
+      "source": "BLOCK_A30-A49",
+      "target": "A41.9"
+    },
+    {
+      "source": "BLOCK_A30-A49",
+      "target": "A41"
+    },
+    {
+      "source": "A41",
+      "target": "A41.9"
+    },
+    {
+      "source": "BLOCK_I20-I25",
+      "target": "I21.4"
+    },
+    {
+      "source": "BLOCK_I20-I25",
+      "target": "I21"
+    },
+    {
+      "source": "BLOCK_I20-I25",
+      "target": "I25.10"
+    },
+    {
+      "source": "BLOCK_I20-I25",
+      "target": "I25"
+    },
+    {
+      "source": "I21",
+      "target": "I21.4"
+    },
+    {
+      "source": "I25",
+      "target": "I25.10"
+    },
+    {
+      "source": "BLOCK_I30-I52",
+      "target": "I35.9"
+    },
+    {
+      "source": "BLOCK_I30-I52",
+      "target": "I35"
+    },
+    {
+      "source": "I35",
+      "target": "I35.9"
+    },
+    {
+      "source": "BLOCK_I60-I69",
+      "target": "I61.9"
+    },
+    {
+      "source": "BLOCK_I60-I69",
+      "target": "I61"
+    },
+    {
+      "source": "I61",
+      "target": "I61.9"
+    },
+    {
+      "source": "BLOCK_J09-J18",
+      "target": "J18.9"
+    },
+    {
+      "source": "BLOCK_J09-J18",
+      "target": "J18"
+    },
+    {
+      "source": "J18",
+      "target": "J18.9"
+    },
+    {
+      "source": "BLOCK_J95-J99",
+      "target": "J96.00"
+    },
+    {
+      "source": "BLOCK_J95-J99",
+      "target": "J96"
+    },
+    {
+      "source": "J96",
+      "target": "J96.00"
+    },
+    {
+      "source": "BLOCK_Z30-Z39",
+      "target": "Z38.00"
+    },
+    {
+      "source": "BLOCK_Z30-Z39",
+      "target": "Z38"
+    },
+    {
+      "source": "BLOCK_Z30-Z39",
+      "target": "Z38.01"
+    },
+    {
+      "source": "BLOCK_Z30-Z39",
+      "target": "Z38.31"
+    },
+    {
+      "source": "Z38",
+      "target": "Z38.00"
+    },
+    {
+      "source": "Z38",
+      "target": "Z38.01"
+    },
+    {
+      "source": "Z38",
+      "target": "Z38.31"
+    }
+  ]
+}
