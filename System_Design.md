@@ -54,7 +54,7 @@ The system now supports both single patient analysis and batch processing of mul
 - **Evaluation**: Model performance metrics and agreement analysis
 
 ### Data Layer (`data/`)
-- **ICD-10 Ontology**: Hierarchical ICD-10 code structure and relationships using graph
+- **ICD-10 Ontology**: Hierarchical ICD-10 code structure and relationships, current code builds a directed acyclic graph (DAG) representing the ICD-10 hierarchy.
 - **Medical Knowledge Base**: Symptom-to-diagnosis mappings from medical literature
 
 ### Model Layer (`models/`)
