@@ -48,7 +48,7 @@ SYMPTOM_CHAPTERS = {
     "stridor": 28
 }
 
-# Example content for most common symptoms - in a real implementation we would extract from PDF
+# Example content for most common symptoms
 SYMPTOM_CONTENT = {
     "abdominal pain": "Abdominal pain is one of the most common symptoms in clinical medicine. The differential diagnosis is broad and includes intra-abdominal and extra-abdominal etiologies. When evaluating abdominal pain, consider pathology affecting the digestive tract, urinary system, reproductive organs, vascular system, and referred pain from other regions. Key characteristics to assess include location, quality, severity, timing, and associated symptoms.",
     

@@ -9,15 +9,7 @@ def display_comparison(
     ml_predictions: Dict[str, Any],
     final_prediction: Dict[str, Any]
 ):
-    """
-    Display comparison of predictions from different models.
-    
-    Args:
-        llm_results: Results from LLM predictions
-        lstm_verified_codes: Verified ICD codes from LSTM model
-        ml_predictions: Predictions from traditional ML model
-        final_prediction: The final ensemble prediction
-    """
+
     st.header("Model Comparison")
     st.markdown("Comparing predictions across different models helps understand the confidence and agreement in the diagnosis.")
     

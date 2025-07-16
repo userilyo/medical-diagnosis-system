@@ -17,10 +17,7 @@ def clear_text():
 
 def render_input_form():
     """
-    Render the form for symptom input.
-    
-    Returns:
-        Symptom text if submitted, empty string otherwise
+    Render the form for symptom input and returns symptom text if submitted, empty string otherwise
     """
     # Clear button outside the form
     st.button("Clear Input", on_click=clear_text)
@@ -39,7 +36,7 @@ def render_input_form():
         col1, col2 = st.columns([1, 1])
         
         with col1:
-            submit_button = st.form_submit_button(label="Analyze Symptoms")
+            submit_button = st.form_submit_button(label="Analyse Symptoms")
         
         if submit_button and symptoms_text:
             return symptoms_text

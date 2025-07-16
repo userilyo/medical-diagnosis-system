@@ -77,7 +77,7 @@ mode_option = st.radio(
     "Choose analysis mode:", ["Single Input", "Batch Processing (CSV)"],
     index=0 if st.session_state.mode == "single" else 1,
     help=
-    "Single Input: Analyze one patient's symptoms at a time. Batch Processing: Upload a CSV file with multiple patients."
+    "Single Input: Analyse one patient's symptoms at a time. Batch Processing: Upload a CSV file with multiple patients."
 )
 
 # Update session state based on selection
@@ -320,7 +320,7 @@ if st.session_state.mode == "single":
             st.session_state.current_analysis = symptoms_text
             st.session_state.symptoms_text = symptoms_text
 
-            with st.spinner("Analyzing symptoms..."):
+            with st.spinner("Analysing symptoms..."):
                 # Preprocess the input text
                 processed_text = preprocess_input(symptoms_text)
 
@@ -410,7 +410,7 @@ if st.session_state.mode == "single":
                     st.success("Analysis complete!")
 
                 except Exception as e:
-                    st.error(f"Error analyzing symptoms: {str(e)}")
+                    st.error(f"Error analysing symptoms: {str(e)}")
 
     # Results display in the second column
     with col2:
