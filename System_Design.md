@@ -24,7 +24,7 @@ The system now supports both single patient analysis and batch processing of mul
 ### Model Architecture
 1. **LLM Integration**: Multiple language models for symptom analysis
 2. **LSTM Verification**: PyTorch-based LSTM model for ICD-10 code verification
-3. **Traditional ML**: Feature-based prediction using numpy/sklearn-style algorithms
+3. **Traditional ML**: Feature-based prediction using Random Forest algorithms
 4. **RAG System**: Knowledge base retrieval for medical literature matching
 
 ## Key Components
@@ -47,14 +47,14 @@ The system now supports both single patient analysis and batch processing of mul
 - **Data Processing**: Text cleaning, medical term extraction, and preprocessing
 - **LLM Module**: Interface for multiple language models with fallback mechanisms
 - **LSTM Verification**: Neural network-based code verification
-- **Traditional ML**: Feature-based prediction algorithms
+- **Traditional ML**: RF prediction algorithms
 - **RAG Processor**: Medical knowledge base retrieval and matching
 - **Ensemble**: Prediction aggregation and confidence scoring
 - **Explainability**: Advanced reasoning generation with LIME integration, dynamic explanations, and comprehensive visualizations
 - **Evaluation**: Model performance metrics and agreement analysis
 
 ### Data Layer (`data/`)
-- **ICD-10 Ontology**: Hierarchical ICD-10 code structure and relationships
+- **ICD-10 Ontology**: Hierarchical ICD-10 code structure and relationships, current code builds a directed acyclic graph (DAG) representing the ICD-10 hierarchy.
 - **Medical Knowledge Base**: Symptom-to-diagnosis mappings from medical literature
 
 ### Model Layer (`models/`)
