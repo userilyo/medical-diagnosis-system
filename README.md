@@ -135,7 +135,7 @@ The project uses a modular architecture:
 ## Academic Paper
 
 This work supports the research paper:
-"Modular Ensemble Framework for ICD-10 Prediction: Integrating Large Language Models, LSTM Verification, Traditional ML, and Retrieval-Augmented Generation in a Streamlit Clinical Application"
+"Modular Hierarchical Ensemble Learning for ICD-10 Prediction: A Framework Integrating Large Language Models, LSTM Verification, Traditional ML, and Retrieval-Augmented Generation"
 
 ## License
 
