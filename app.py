@@ -1,18 +1,44 @@
+"""
+Medical Diagnosis and ICD-10 Prediction Application
+
+A comprehensive Streamlit web application that combines multiple AI/ML approaches
+to analyze patient symptoms and provide accurate ICD-10 diagnostic predictions.
+
+Features:
+- Multi-modal ensemble of 5 LLMs (DeepSeek, Gemini, O1-Preview, OpenBioLLM, BioMistral)
+- LSTM neural network verification (paper-based trained model)
+- Traditional ML with RandomForest (MIMIC-III dataset)
+- Real RAG processing of medical literature PDFs
+- Hierarchical ICD-10 matching and evaluation
+- Single patient analysis and batch processing modes
+- Advanced explainability with LIME integration
+- Comprehensive performance metrics and visualization
+
+Architecture:
+- Frontend: Streamlit with modular component design
+- Backend: Ensemble methodology with parallel model execution
+- Data: ICD-10 ontology with comprehensive graph structure
+- Models: Paper-based LSTM (81% accuracy) + RandomForest (100 estimators)
+- RAG: Real PDF processing with TF-IDF similarity search
+
+Author: Medical AI Research Team
+Paper: "A Modular Hierarchical Ensemble Framework for ICD-10 Prediction"
+"""
+
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Tuple
 import time
 import io
+import logging
 
-# Import components
 from components.input_form import render_input_form
 from components.results_display import display_results
 from components.comparison_view import display_comparison
 from components.llm_results_view import display_individual_llm_results, display_model_status_summary, display_api_usage_info
 
-# Import utilities
 from utils.data_processing import preprocess_input
 from utils.llm_module import predict_with_llms, get_consolidated_icd_codes
 from utils.lstm_verification import verify_icd_codes
@@ -22,48 +48,49 @@ from utils.ensemble import ensemble_predictions
 from utils.explainability import generate_explanation
 from utils.evaluation import calculate_metrics
 
-# Import ICD-10 data handling
 from data.icd10_ontology import get_hierarchical_codes
 
-# Load environment variables for local development
 try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
-    pass  # dotenv not available in some environments
+    pass
 
-# Set page configuration
-st.set_page_config(page_title="Medical diagnosis and ICD10 prediction",
-                   page_icon="🏥",
-                   layout="wide")
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
-# Initialize session state variables if they don't exist
-if 'symptoms_text' not in st.session_state:
-    st.session_state.symptoms_text = ""
-if 'llm_results' not in st.session_state:
-    st.session_state.llm_results = {}
-if 'lstm_verified_codes' not in st.session_state:
-    st.session_state.lstm_verified_codes = {}
-if 'ml_predictions' not in st.session_state:
-    st.session_state.ml_predictions = {}
-if 'rag_results' not in st.session_state:
-    st.session_state.rag_results = {}
-if 'final_prediction' not in st.session_state:
-    st.session_state.final_prediction = {}
-if 'explanation' not in st.session_state:
-    st.session_state.explanation = {}
-if 'hierarchical_codes' not in st.session_state:
-    st.session_state.hierarchical_codes = {}
-if 'metrics' not in st.session_state:
-    st.session_state.metrics = {}
-if 'mode' not in st.session_state:
-    st.session_state.mode = "single"
-if 'batch_results' not in st.session_state:
-    st.session_state.batch_results = []
-if 'batch_df' not in st.session_state:
-    st.session_state.batch_df = None
+def initialize_session_state():
+    """Initialize all Streamlit session state variables with default values."""
+    default_states = {
+        'symptoms_text': "",
+        'llm_results': {},
+        'lstm_verified_codes': {},
+        'ml_predictions': {},
+        'rag_results': {},
+        'final_prediction': {},
+        'explanation': {},
+        'hierarchical_codes': {},
+        'metrics': {},
+        'mode': "single",
+        'batch_results': [],
+        'batch_df': None
+    }
+    
+    for key, default_value in default_states.items():
+        if key not in st.session_state:
+            st.session_state[key] = default_value
 
-# Application header
+st.set_page_config(
+    page_title="Medical diagnosis and ICD10 prediction",
+    page_icon="🏥",
+    layout="wide"
+)
+
+initialize_session_state()
+
 st.title("Medical diagnosis and ICD10 prediction")
 st.markdown("""
     This application analyses patient symptoms using multiple LLM models to predict possible diseases 
@@ -71,92 +98,82 @@ st.markdown("""
     and an LSTM neural network to verify the ICD-10 codes.
 """)
 
-# Mode selector
 st.header("Analysis Mode")
 mode_option = st.radio(
-    "Choose analysis mode:", ["Single Input", "Batch Processing (CSV)"],
+    "Choose analysis mode:", 
+    ["Single Input", "Batch Processing (CSV)"],
     index=0 if st.session_state.mode == "single" else 1,
-    help=
-    "Single Input: Analyse one patient's symptoms at a time. Batch Processing: Upload a CSV file with multiple patients."
+    help="Single Input: Analyze one patient's symptoms at a time. Batch Processing: Upload a CSV file with multiple patients."
 )
 
-# Update session state based on selection
-if mode_option == "Single Input":
-    st.session_state.mode = "single"
-elif mode_option == "Batch Processing (CSV)":
-    st.session_state.mode = "batch"
+st.session_state.mode = "single" if mode_option == "Single Input" else "batch"
 
 
-# Helper functions for batch processing
 def process_single_patient(symptoms_text: str,
                            ground_truth_icd: str = None,
                            max_pages: int = 100) -> Dict[str, Any]:
-    """Process a single patient's symptoms and return results"""
+    """
+    Process a single patient's symptoms through the complete diagnostic pipeline.
+    
+    Args:
+        symptoms_text: Patient's symptom description
+        ground_truth_icd: Optional ground truth ICD-10 code for validation
+        max_pages: Maximum PDF pages to process for RAG (default: 100)
+        
+    Returns:
+        Dictionary containing all prediction results, metrics, and status information
+    """
     try:
-        # Preprocess the input text
+        logger.info(f"Processing patient symptoms (length: {len(symptoms_text)})")
+        
         processed_text = preprocess_input(symptoms_text)
+        logger.debug(f"Text preprocessing completed")
 
-        # Get predictions from different models
         llm_results = predict_with_llms(processed_text)
-        print(f"DEBUG: LLM results type: {type(llm_results)}")
+        logger.debug(f"LLM predictions completed: {type(llm_results)}")
 
         lstm_verified_codes = verify_icd_codes(processed_text, llm_results)
-        print(f"DEBUG: LSTM results type: {type(lstm_verified_codes)}")
+        logger.debug(f"LSTM verification completed: {type(lstm_verified_codes)}")
 
         ml_predictions = feature_based_prediction(processed_text)
-        print(f"DEBUG: ML predictions type: {type(ml_predictions)}")
+        logger.debug(f"ML predictions completed: {type(ml_predictions)}")
 
         rag_results = retrieve_relevant_info(processed_text, max_pages=max_pages)
-        print(f"DEBUG: RAG results type: {type(rag_results)}")
+        logger.debug(f"RAG processing completed: {type(rag_results)}")
 
-        # Create ensemble prediction
-        final_prediction = ensemble_predictions(llm_results,
-                                                lstm_verified_codes,
-                                                ml_predictions, rag_results)
+        final_prediction = ensemble_predictions(
+            llm_results, lstm_verified_codes, ml_predictions, rag_results
+        )
 
-        # Generate explanation with enhanced capabilities
-        explanation = generate_explanation(final_prediction,
-                                           llm_results,
-                                           rag_results,
-                                           symptoms_text=processed_text,
-                                           ml_predictions=ml_predictions)
+        explanation = generate_explanation(
+            final_prediction, llm_results, rag_results,
+            symptoms_text=processed_text, ml_predictions=ml_predictions
+        )
 
-        # Calculate metrics if ground truth is provided
-        metrics = calculate_metrics(final_prediction, llm_results,
-                                    lstm_verified_codes, ml_predictions)
+        metrics = calculate_metrics(
+            final_prediction, llm_results, lstm_verified_codes, ml_predictions
+        )
 
+        logger.info(f"Patient processing completed successfully")
         return {
-            "symptoms":
-            symptoms_text,
-            "ground_truth":
-            ground_truth_icd,
-            "predicted_icd":
-            final_prediction["primary_diagnosis"]["icd_code"],
-            "predicted_condition":
-            final_prediction["primary_diagnosis"]["condition"],
-            "confidence":
-            final_prediction["primary_diagnosis"]["confidence"],
-            "llm_results":
-            llm_results,
-            "lstm_verified_codes":
-            lstm_verified_codes,
-            "ml_predictions":
-            ml_predictions,
-            "rag_results":
-            rag_results,
-            "final_prediction":
-            final_prediction,
-            "explanation":
-            explanation,
-            "metrics":
-            metrics,
-            "status":
-            "success"
+            "symptoms": symptoms_text,
+            "ground_truth": ground_truth_icd,
+            "predicted_icd": final_prediction["primary_diagnosis"]["icd_code"],
+            "predicted_condition": final_prediction["primary_diagnosis"]["condition"],
+            "confidence": final_prediction["primary_diagnosis"]["confidence"],
+            "llm_results": llm_results,
+            "lstm_verified_codes": lstm_verified_codes,
+            "ml_predictions": ml_predictions,
+            "rag_results": rag_results,
+            "final_prediction": final_prediction,
+            "explanation": explanation,
+            "metrics": metrics,
+            "status": "success"
         }
     except Exception as e:
-        print(f"DEBUG: Error in process_single_patient: {e}")
+        logger.error(f"Error processing patient: {e}")
         import traceback
-        traceback.print_exc()
+        logger.debug(traceback.format_exc())
         return {
             "symptoms": symptoms_text,
             "ground_truth": ground_truth_icd,
@@ -168,31 +185,51 @@ def process_single_patient(symptoms_text: str,
         }
 
 
-def validate_csv_format(df: pd.DataFrame) -> tuple[bool, str]:
-    """Validate CSV format and return validation status and message"""
+def validate_csv_format(df: pd.DataFrame) -> Tuple[bool, str]:
+    """
+    Validate uploaded CSV format for batch processing requirements.
+    
+    Args:
+        df: Pandas DataFrame to validate
+        
+    Returns:
+        Tuple of (is_valid: bool, message: str) indicating validation result
+    """
     required_columns = ['symptoms']
+    logger.debug(f"Validating CSV with {len(df)} rows and columns: {list(df.columns)}")
 
     if df.empty:
+        logger.warning("CSV validation failed: empty file")
         return False, "CSV file is empty"
 
-    missing_columns = [
-        col for col in required_columns if col not in df.columns
-    ]
+    missing_columns = [col for col in required_columns if col not in df.columns]
     if missing_columns:
+        logger.warning(f"CSV validation failed: missing columns {missing_columns}")
         return False, f"Missing required columns: {missing_columns}"
 
-    # Check for empty symptoms
     if df['symptoms'].isna().any() or (df['symptoms'] == '').any():
+        empty_count = df['symptoms'].isna().sum() + (df['symptoms'] == '').sum()
+        logger.warning(f"CSV validation failed: {empty_count} rows with empty symptoms")
         return False, "Some rows have empty symptoms"
 
+    logger.info(f"CSV validation successful: {len(df)} rows ready for processing")
     return True, "CSV format is valid"
 
 
-def create_batch_results_df(
-        batch_results: List[Dict[str, Any]]) -> pd.DataFrame:
-    """Create a DataFrame from batch processing results"""
+def create_batch_results_df(batch_results: List[Dict[str, Any]]) -> pd.DataFrame:
+    """
+    Transform batch processing results into a structured DataFrame for analysis.
+    
+    Args:
+        batch_results: List of patient processing result dictionaries
+        
+    Returns:
+        DataFrame with organized results including hierarchical ICD-10 matching metrics
+    """
+    logger.info(f"Creating results DataFrame from {len(batch_results)} patient results")
+    
     df_data = []
-    for result in batch_results:
+    for idx, result in enumerate(batch_results):
         row = {
             "symptoms": result["symptoms"],
             "predicted_icd": result["predicted_icd"],
@@ -201,39 +238,41 @@ def create_batch_results_df(
             "status": result["status"]
         }
 
-        # Add ground truth if available
         if result.get("ground_truth"):
             row["ground_truth"] = result["ground_truth"]
-            row["correct_prediction"] = result["predicted_icd"] == result[
-                "ground_truth"]
+            row["correct_prediction"] = result["predicted_icd"] == result["ground_truth"]
             
-            # Add hierarchical matching results using comprehensive evaluation
             try:
                 from utils.icd10_comprehensive import calculate_hierarchical_accuracy
                 hierarchical_sim = calculate_hierarchical_accuracy(
                     result["predicted_icd"], result["ground_truth"]
                 )
-                row["category_match"] = hierarchical_sim["category_match"]
-                row["block_match"] = hierarchical_sim["block_match"]
-                row["chapter_match"] = hierarchical_sim.get("chapter_match", 0)
-                row["weighted_score"] = hierarchical_sim["weighted_score"]
+                row.update({
+                    "category_match": hierarchical_sim["category_match"],
+                    "block_match": hierarchical_sim["block_match"],
+                    "chapter_match": hierarchical_sim.get("chapter_match", 0),
+                    "weighted_score": hierarchical_sim["weighted_score"]
+                })
+                logger.debug(f"Row {idx}: comprehensive hierarchical evaluation completed")
             except Exception as e:
-                # Fallback to old system if comprehensive evaluation fails
+                logger.warning(f"Row {idx}: falling back to legacy hierarchical matching: {e}")
                 from utils.hierarchical_icd10 import hierarchical_matcher
                 hierarchical_sim = hierarchical_matcher.calculate_hierarchical_similarity(
                     result["predicted_icd"], result["ground_truth"]
                 )
-                row["category_match"] = hierarchical_sim["category_match"]
-                row["block_match"] = hierarchical_sim["block_match"]
-                row["chapter_match"] = hierarchical_sim["chapter_match"]
-                row["weighted_score"] = hierarchical_sim["weighted_score"]
+                row.update({
+                    "category_match": hierarchical_sim["category_match"],
+                    "block_match": hierarchical_sim["block_match"],
+                    "chapter_match": hierarchical_sim["chapter_match"],
+                    "weighted_score": hierarchical_sim["weighted_score"]
+                })
 
-        # Add error information if available
         if result.get("error"):
             row["error"] = result["error"]
 
         df_data.append(row)
 
+    logger.info(f"DataFrame created successfully with {len(df_data)} rows")
     return pd.DataFrame(df_data)
 
 
@@ -320,31 +359,28 @@ if st.session_state.mode == "single":
             st.session_state.current_analysis = symptoms_text
             st.session_state.symptoms_text = symptoms_text
 
-            with st.spinner("Analysing symptoms..."):
+            with st.spinner("Analyzing symptoms..."):
                 # Preprocess the input text
                 processed_text = preprocess_input(symptoms_text)
 
                 # Get predictions from different models using our LLM module
                 try:
-                    # Step 1: Get predictions from LLMs (Ollama API)
-                    st.session_state.llm_results = predict_with_llms(
-                        processed_text)
-                    print(f"DEBUG: LLM results completed")
+                    logger.info("Starting single patient analysis pipeline")
+                    
+                    st.session_state.llm_results = predict_with_llms(processed_text)
+                    logger.debug("LLM predictions completed successfully")
 
-                    # Step 2: Verify ICD codes using LSTM model
                     st.session_state.lstm_verified_codes = verify_icd_codes(
                         processed_text, st.session_state.llm_results)
-                    print(f"DEBUG: LSTM verification completed")
+                    logger.debug("LSTM verification completed successfully")
 
-                    # Step 3: Get predictions from traditional ML model
-                    st.session_state.ml_predictions = feature_based_prediction(
-                        processed_text)
-                    print(f"DEBUG: ML predictions completed")
+                    st.session_state.ml_predictions = feature_based_prediction(processed_text)
+                    logger.debug("Traditional ML predictions completed successfully")
 
-                    # Step 4: Get relevant information from RAG system (if enabled)
                     if st.session_state.get('rag_enabled', True):
                         st.session_state.rag_results = retrieve_relevant_info(
                             processed_text, max_pages=st.session_state.get('pdf_pages', 100))
+                        logger.debug("RAG processing completed successfully")
                     else:
                         st.session_state.rag_results = {
                             "relevant_info": "RAG disabled by user",
@@ -355,7 +391,7 @@ if st.session_state.mode == "single":
                             "search_method": "disabled",
                             "knowledge_base_stats": {"pdf_loaded": False, "pdf_chunks": 0}
                         }
-                    print(f"DEBUG: RAG results completed")
+                        logger.info("RAG processing skipped (disabled by user)")
 
                     # Check if Ollama is unavailable and show appropriate message
                     if "_system_note" in st.session_state.llm_results:
@@ -380,37 +416,37 @@ if st.session_state.mode == "single":
                                 "⚠️ Ollama LLM service unavailable. Using traditional machine learning for predictions.",
                                 icon="⚠️")
 
-                    # Step 5: Create ensemble prediction by combining all results
-                    print(f"DEBUG: About to start ensemble predictions")
+                    logger.debug("Starting ensemble prediction aggregation")
                     st.session_state.final_prediction = ensemble_predictions(
                         st.session_state.llm_results,
                         st.session_state.lstm_verified_codes,
                         st.session_state.ml_predictions,
                         st.session_state.rag_results)
-                    print(f"DEBUG: Ensemble predictions completed")
+                    logger.debug("Ensemble predictions completed successfully")
 
-                    # Generate explanation for the predictions
                     st.session_state.explanation = generate_explanation(
                         st.session_state.final_prediction,
                         st.session_state.llm_results,
                         st.session_state.rag_results)
+                    logger.debug("Explanation generation completed")
 
-                    # Get hierarchical information for the primary diagnosis
                     st.session_state.hierarchical_codes = get_hierarchical_codes(
-                        st.session_state.final_prediction["primary_diagnosis"]
-                        ["icd_code"])
+                        st.session_state.final_prediction["primary_diagnosis"]["icd_code"])
+                    logger.debug("Hierarchical code analysis completed")
 
-                    # Calculate metrics for model comparison
                     st.session_state.metrics = calculate_metrics(
                         st.session_state.final_prediction,
                         st.session_state.llm_results,
                         st.session_state.lstm_verified_codes,
                         st.session_state.ml_predictions)
+                    logger.debug("Metrics calculation completed")
 
+                    logger.info("Single patient analysis pipeline completed successfully")
                     st.success("Analysis complete!")
 
                 except Exception as e:
-                    st.error(f"Error analysing symptoms: {str(e)}")
+                    logger.error(f"Error in single patient analysis: {str(e)}")
+                    st.error(f"Error analyzing symptoms: {str(e)}")
 
     # Results display in the second column
     with col2:
@@ -662,34 +698,29 @@ elif st.session_state.mode == "batch":
             is_valid, message = validate_csv_format(df)
 
             if is_valid:
+                logger.info(f"CSV validation successful: {len(df)} patients loaded")
                 st.success(f"CSV file loaded successfully! {message}")
 
-                # Display preview of the data
                 st.subheader("Data Preview")
                 st.dataframe(df.head(10))
 
-                # Show basic statistics
                 col1, col2, col3 = st.columns(3)
                 with col1:
                     st.metric("Total Patients", len(df))
                 with col2:
-                    st.metric(
-                        "Has Ground Truth",
-                        len(df[df.get('ground_truth', pd.Series()).notna()]))
+                    ground_truth_count = len(df[df.get('ground_truth', pd.Series()).notna()])
+                    st.metric("Has Ground Truth", ground_truth_count)
                 with col3:
-                    st.metric(
-                        "Has Patient ID",
-                        len(df[df.get('patient_id', pd.Series()).notna()]))
+                    patient_id_count = len(df[df.get('patient_id', pd.Series()).notna()])
+                    st.metric("Has Patient ID", patient_id_count)
 
-                # Process batch button
                 if st.button("Process Batch", type="primary"):
+                    logger.info(f"Starting batch processing for {len(df)} patients")
                     st.session_state.batch_results = []
 
-                    # Create progress bar
                     progress_bar = st.progress(0)
                     status_text = st.empty()
 
-                    # Process each patient
                     for idx, row in df.iterrows():
                         progress = (idx + 1) / len(df)
                         progress_bar.progress(progress)
@@ -697,30 +728,29 @@ elif st.session_state.mode == "batch":
                             f"Processing patient {idx + 1}/{len(df)}: {row['symptoms'][:50]}..."
                         )
 
-                        # Get ground truth if available
-                        ground_truth = row.get('ground_truth', None)
-
-                        # Process the patient with current RAG settings
                         result = process_single_patient(
-                            row['symptoms'], ground_truth, 
-                            max_pages=st.session_state.get('pdf_pages', 100))
+                            row['symptoms'], 
+                            row.get('ground_truth', None), 
+                            max_pages=st.session_state.get('pdf_pages', 100)
+                        )
 
-                        # Add patient ID if available
-                        if 'patient_id' in row:
-                            result['patient_id'] = row['patient_id']
-                        else:
-                            result['patient_id'] = idx + 1
-
+                        result['patient_id'] = row.get('patient_id', idx + 1)
                         st.session_state.batch_results.append(result)
+                        
+                        if idx % 5 == 0:  # Log every 5th patient
+                            logger.debug(f"Processed {idx + 1}/{len(df)} patients")
 
                     progress_bar.progress(1.0)
                     status_text.text("Batch processing complete!")
+                    logger.info(f"Batch processing completed: {len(df)} patients processed successfully")
                     st.success(f"Successfully processed {len(df)} patients!")
 
             else:
+                logger.error(f"CSV validation failed: {message}")
                 st.error(f"Invalid CSV format: {message}")
 
         except Exception as e:
+            logger.error(f"Error reading CSV file: {str(e)}")
             st.error(f"Error reading CSV file: {str(e)}")
 
     # Display batch results if available
